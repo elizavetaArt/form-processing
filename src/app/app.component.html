@@ -1,0 +1,53 @@
+<hr>
+<form [formGroup]="myForm" novalidate (ngSubmit)="submit()">
+  <div class="form-group">
+    <label class="a1">What is your name?</label>
+    <input name="name" formControlName="name" placeholder="">
+    <div class="alert alert-danger"
+         *ngIf="myForm.controls['name'].invalid && myForm.controls['name'].touched">
+      Name is not specified, please correct.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="a1">What is your fathername?</label>
+    <input name="fatherName" formControlName="fatherName" placeholder="">
+    <div class="alert alert-danger"
+         *ngIf="myForm.controls['fatherName'].invalid && myForm.controls['fatherName'].touched">
+      Fathername is not specified, please correct.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="a1">How old are you?</label>
+    <input name="age" formControlName="age" placeholder="" />
+    <div class="alert alert-danger"
+         *ngIf="myForm.controls['age'].invalid && myForm.controls['age'].touched">
+      Age is not specified, please correct.
+    </div>
+  </div>
+
+  <div formArrayName="phone">
+    <div *ngFor="let phones of myForm.controls['phone'].controls; let i = index">
+      <label class="a1">What is your phone number?</label>
+      <input formControlName="{{i}}" placeholder="" />
+    </div>
+  </div>
+  <button class="btn btn-default" (click)="addPhone()">
+    ADD number
+  </button>
+
+  <div class="form-group" formArrayName="email">
+    <div *ngFor="let emails of myForm.controls['email'].controls; let b = index">
+      <label class="a1">What is your e-mail?</label>
+      <input formControlName="{{b}}" placeholder="">
+    </div>
+  </div>
+  <button class="btn btn-default" (click)="addEmail()">
+    ADD e-mail
+  </button>
+
+  <div class="form-group">
+    <button class="btn btn-default" [disabled]="myForm.invalid">ADD</button>
+  </div>
+</form>
