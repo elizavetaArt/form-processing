@@ -1,5 +1,9 @@
 .a1 {
-  width: 250px;
+  width: 400px;
 }
 input.ng-touched.ng-invalid {border:solid red 2px;}
 input.ng-touched.ng-valid {border:solid green 2px;}
+
+form {
+  margin-left: 400px;
+}

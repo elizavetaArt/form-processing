@@ -1,53 +1,104 @@
 <hr>
-<form [formGroup]="myForm" novalidate (ngSubmit)="submit()">
-  <div class="form-group">
-    <label class="a1">What is your name?</label>
-    <input name="name" formControlName="name" placeholder="">
-    <div class="alert alert-danger"
-         *ngIf="myForm.controls['name'].invalid && myForm.controls['name'].touched">
-      Name is not specified, please correct.
-    </div>
-  </div>
+<div class="form-group">
+  <label class="a1">Выберите мойку:</label>
+  <label>
+    <select name="carWash" [(ngModel)]="wash.carWash" #washCarWash="ngModel">
+      <option *ngFor="let carW of carWashP" [value]="carW">
+        {{carW}}
+      </option>
+    </select>
+  </label>
+</div>
 
-  <div class="form-group">
-    <label class="a1">What is your fathername?</label>
-    <input name="fatherName" formControlName="fatherName" placeholder="">
-    <div class="alert alert-danger"
-         *ngIf="myForm.controls['fatherName'].invalid && myForm.controls['fatherName'].touched">
-      Fathername is not specified, please correct.
-    </div>
-  </div>
+<div class="form-group">
+  <label class="a1">Выберите услугу: </label>
+  <label>
+    <select name="service" [(ngModel)]="wash.service" #washService="ngModel">
+      <option *ngFor="let ser of serviceP" [value]="ser">
+        {{ser}}
+      </option>
+    </select>
+  </label>
+</div>
 
-  <div class="form-group">
-    <label class="a1">How old are you?</label>
-    <input name="age" formControlName="age" placeholder="" />
-    <div class="alert alert-danger"
-         *ngIf="myForm.controls['age'].invalid && myForm.controls['age'].touched">
-      Age is not specified, please correct.
-    </div>
-  </div>
+<div class="form-group">
+  <label class="a1">Выберите конкрктную услугу: </label>
+  <label>
+    <select name="typeService" [(ngModel)]="wash.typeService" #washTypeService="ngModel">
+      <option *ngFor="let tServ of typeServiceP" [value]="tServ">
+        {{tServ}}
+      </option>
+    </select>
+  </label>
+</div>
 
-  <div formArrayName="phone">
-    <div *ngFor="let phones of myForm.controls['phone'].controls; let i = index">
-      <label class="a1">What is your phone number?</label>
-      <input formControlName="{{i}}" placeholder="" />
-    </div>
-  </div>
-  <button class="btn btn-default" (click)="addPhone()">
-    ADD number
-  </button>
+<div class="form-group">
+  <label class="a1">Выберите вид авто:</label>
+  <label>
+    <select name="typeAuto" [(ngModel)]="wash.typeAuto" #washTypeAuto="ngModel" >
+      <option *ngFor="let tAuto of typeAutoP" [value]="tAuto">
+        {{tAuto}}
+      </option>
+    </select>
+  </label>
+</div>
 
-  <div class="form-group" formArrayName="email">
-    <div *ngFor="let emails of myForm.controls['email'].controls; let b = index">
-      <label class="a1">What is your e-mail?</label>
-      <input formControlName="{{b}}" placeholder="">
-    </div>
-  </div>
-  <button class="btn btn-default" (click)="addEmail()">
-    ADD e-mail
-  </button>
+<div class="form-group">
+  <label class="a1">Выберите дату:</label>
+  <input type="date" name="date" [(ngModel)]="wash.date"
+         #washDate="ngModel" placeholder="" required>
+</div>
 
-  <div class="form-group">
-    <button class="btn btn-default" [disabled]="myForm.invalid">ADD</button>
+<div class="form-group">
+  <label class="a1">Выберите время:</label>
+  <label>
+    <select name="time" [(ngModel)]="wash.time" #washTime="ngModel">
+      <option *ngFor="let times of timeP" [value]="times">
+        {{times}}
+      </option>
+    </select>
+  </label>
+</div>
+
+<div>
+  <div>
+    <label class="a1">Введите ваш номер телефона: </label>
+    <input type="tel" name="tel" [(ngModel)]="wash.tel" #washTel="ngModel"
+           placeholder="" required pattern="[0-9]{10}"/>
   </div>
-</form>
+</div>
+<button class="btn btn-default" (click)="addWash(washCarWash, washService,
+washTypeService, washTypeAuto, washDate, washTime, washTel, washUserName, washComment)">
+  Добавить номер
+</button>
+
+<div class="form-group">
+  <div>
+    <label class="a1">Введите ваше имя: </label>
+    <input type="text" name="userName" [(ngModel)]="wash.userName"
+           #washUserName="ngModel" placeholder="" required>
+  </div>
+</div>
+
+<div class="form-group">
+  <textarea name="comment" [(ngModel)]="wash.comment"
+            #washComment="ngModel" placeholder="ваш комментарий"></textarea>
+</div>
+
+<div class="form-group">
+  <button class="btn btn-default">Отправить</button>
+</div>
+
+<div>
+  <p>{{washCarWash.name}} : {{washCarWash.model}}</p>
+  <p>{{washService.name}} : {{washService.model}}</p>
+  <p>{{washTypeService.name}} : {{washTypeService.model}}</p>
+  <p>{{washTypeAuto.name}} : {{washTypeAuto.model}}</p>
+  <p>{{washDate.name}} : {{washDate.model}}</p>
+  <p>{{washTime.name}} : {{washTime.model}}</p>
+  <p>{{washTel.name}} : {{washTel.model}}</p>
+  <p>{{washUserName.name}} : {{washUserName.model}}</p>
+  <p>{{washComment.name}} : {{washComment.model}}</p>
+</div>
+
+
